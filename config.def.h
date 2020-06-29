@@ -3,11 +3,12 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappx     = 5;        /*  gap size */
+static const unsigned int gappx     = 6;        /*  gap size */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
 static const char *fonts[]          = { "mononoki Nerd Font:size=10" };
-static const char dmenufont[]       = "mononoki Nerd Font:size=10";
+static const char dmenufont[]       = "mononoki Nerd Font:size=24";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -22,8 +23,8 @@ static const char *colors[][3]      = {
 
 /* tagging */
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
-/* static const char *tags[] = { "", "", "", "", "", "", "", "", "" }; */
-static const char *tags[] = { "sys", "www", "dev", "doc", "chat", "mus", "vid" };
+static const char *tags[] = { "", "", "", "", "", "", };
+/* static const char *tags[] = { "sys", "www", "dev", "doc", "chat", "mus", "vid" }; */
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -47,6 +48,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -62,7 +65,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_darkblue, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run","-i", "-m", dmenumon, "-c", "-l", "20", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_darkblue, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
@@ -70,6 +73,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("emacsclient -c") },
+	/* { MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("st -e vim") }, */
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("xkill") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD("surf") },
 	{ MODKEY|ControlMask,           XK_j,      spawn,          SHCMD("/home/jd/.dwm/autostart.sh") },
@@ -86,6 +90,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
