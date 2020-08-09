@@ -7,8 +7,8 @@ static const unsigned int gappx     = 6;        /*  gap size */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int user_bh            = 24;        /* 0 means that dwm will calculate bar height, >= 1 means dwm will user_bh as bar height */
-static const char *fonts[]          = { "mononoki Nerd Font:size=10" };
-static const char dmenufont[]       = "mononoki Nerd Font:size=10";
+static const char *fonts[]          = { "mononoki Nerd Font:size=20" };
+static const char dmenufont[]       = "mononoki Nerd Font:size=20";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -72,10 +72,10 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("emacsclient -c") },
-	/* { MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("st -e vim") }, */
+	// { MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("emacsclient -c") },
+	{ MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("st -e nvim") },
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("xkill") },
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("surf") },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("firefox") },
 	{ MODKEY|ControlMask,           XK_j,      spawn,          SHCMD("/home/jd/.dwm/autostart.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -88,10 +88,11 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY|ControlMask|ShiftMask, XK_1,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ControlMask|ShiftMask, XK_2,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ControlMask|ShiftMask, XK_3,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ControlMask|ShiftMask, XK_4,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY|ControlMask|ShiftMask, XK_5,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
