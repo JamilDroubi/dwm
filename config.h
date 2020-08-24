@@ -75,7 +75,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ShiftMask,             XK_j,      spawn,          SHCMD("emacsclient -c") },
 	{ MODKEY,                       XK_Escape, spawn,          SHCMD("xkill") },
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("surf") },
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("tabbed surf -e") },
 	{ MODKEY|ControlMask,           XK_j,      spawn,          SHCMD("/home/jd/.dwm/autostart.sh") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
